@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天气（链式）</title>
+    <link rel="stylesheet" href="../css/天气.css"/>
+</head>
+<script>
+    window.onload=function(){
+        var button=document.getElementById('button');
+        var top=document.getElementById('top');
+        var righta=document.getElementById('right');
+        var movea=document.getElementsByTagName('a')[0];
+        button.onclick=function(){
+            startMove(righta,{right:50},function(){
+                top.style.display='block';
+                startMove(top,{
+                    bottom:50
+                })
+            });
+        };
+        movea.onclick=function(){
+            startMove(top,{bottom:-240},function(){
+                top.style.display='none';
+                startMove(righta,{
+                   right:-200
+                });
+
+            });
+        }
+    }
+</script>
+<body>
+<main>
+    <div id="button">&#xf060;</div>
+    <div id="top">
+        <a href="javascript:;"></a>
+        <div class="to">
+            <div class="left"><img src="../img/tainqi1.png" alt=""/></div>
+            <div class="right">
+                <h3>32°<span>UV:8</span></h3>
+                <p>05;32</p>
+                <p>22:08</p>
+            </div>
+        </div>
+        <div class="mid">
+            <div class="left"><img src="../img/tianqi2.png" alt=""/></div>
+            <div class="right">
+                <h3>22°</h3>
+                <p>H:09:36-22:08</p>
+                <p>L:03:36-16:05</p>
+            </div>
+        </div>
+        <div class="bot">
+            <div class="left"><img src="../img/tianqi3.png" alt=""/></div>
+            <div class="right">
+                <h3>22 <span>MPH</span></h3>
+                <p>South&nbsp;West</p>
+            </div>
+        </div>
+    </div>
+    <div id="right">
+        <p>Saturday</p>
+        <p>Afternoon</p>
+    </div>
+</main>
+<script src="../js/move1.js"></script>
+<script src="../js/jquery.js"></script>
+</body>
+</html>

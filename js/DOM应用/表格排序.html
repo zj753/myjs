@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格排序</title>
+    <style>
+        table{
+            margin: 30px auto 0;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        td{
+            width: 80px;
+            height: 30px;
+        }
+        #pa{
+            width: 140px;
+            margin: 20px auto;
+        }
+
+    </style>
+</head>
+<script>
+    window.onload=function(){
+        var tab=document.getElementById('tab');
+        var row=tab.tBodies[0].rows;
+        var back='';
+        var pai=document.getElementById('pai');
+        var arr=[];
+
+//        排序
+        pai.onclick=function(){
+            for(var j=0;j<row.length;j++){
+                arr[j]=row[j];
+            }
+            arr.sort(function(tr1,tr2){
+                    var num1=parseInt(tr1.cells[5].innerHTML);
+                    var num2=parseInt(tr2.cells[5].innerHTML);
+                    return num1-num2;
+            });
+            for(var b=1;b<arr.length;b++){
+                tab.tBodies[0].appendChild(arr[b]);
+            }
+            for(var i=0;i<row.length;i++){
+                row[i].onmouseover=function(){
+                    back=this.style.background;
+                    this.style.background='#de939f';
+                };
+                row[i].onmouseout=function(){
+                    this.style.background=back;
+                };
+                if(i%2){
+                    row[i].style.background='';
+                }else{
+                    row[i].style.background='#dbbdbe';
+                }
+            }
+        }
+        for(var i=0;i<row.length;i++){
+            row[i].onmouseover=function(){
+                back=this.style.background;
+                this.style.background='#de939f';
+            };
+            row[i].onmouseout=function(){
+                this.style.background=back;
+            };
+            if(i%2){
+                row[i].style.background='';
+            }else{
+                row[i].style.background='#dbbdbe';
+            }
+        }
+    }
+</script>
+<body>
+<div id="pa"><button id="pai">根据总成绩排序</button></div>
+<table border="1" id="tab">
+    <thead>
+    <tr>
+        <td>姓名</td>
+        <td>学号</td>
+        <td>数学</td>
+        <td>英语</td>
+        <td>语文</td>
+        <td>总成绩</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>王晓晓</td>
+        <td>1</td>
+        <td>88</td>
+        <td>99</td>
+        <td>89</td>
+        <td>276</td>
+    </tr>
+    <tr>
+        <td>张丽</td>
+        <td>2</td>
+        <td>88</td>
+        <td>99</td>
+        <td>99</td>
+        <td>286</td>
+    </tr>
+    <tr>
+        <td>孙小小</td>
+        <td>3</td>
+        <td>93</td>
+        <td>99</td>
+        <td>89</td>
+        <td>281</td>
+    </tr>
+    <tr>
+        <td>张军</td>
+        <td>4</td>
+        <td>98</td>
+        <td>99</td>
+        <td>89</td>
+        <td>286</td>
+    </tr>
+    <tr>
+        <td>王军</td>
+        <td>5</td>
+        <td>88</td>
+        <td>89</td>
+        <td>100</td>
+        <td>277</td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="../js/jquery.js"></script>
+</body>
+</html>

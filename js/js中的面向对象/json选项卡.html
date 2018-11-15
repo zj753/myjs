@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            /*background-color: #b6e2eb;*/
+        }
+        #box{
+            margin: 50px auto;
+            display: flex;
+            position: relative;
+            width: 520px;
+            justify-content: space-around;
+            font-size: 15px;
+        }
+        #box dl{
+            flex: 1;
+            background: linear-gradient(#FEFEFE,#F9F9F9,#F2F2F2);
+
+        }
+        #box dl dt{
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 1px solid gainsboro;
+            box-sizing: border-box;
+            cursor: pointer;
+            border-right: none;
+            /*background: linear-gradient(#FEFEFE,#F9F9F9,#F2F2F2);*/
+        }
+        #box dl:last-of-type dt{
+            border-right:1px solid gainsboro;
+
+        }
+        #box dl dd{
+            position: absolute;
+            display: none;
+            background-color: white;
+            left: 0;
+            top: 40px;
+            right: 0;
+            border: 1px solid gainsboro;
+            border-top: none;
+            margin: 0;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        #box dl.active dt{
+            color: #1c8ec5;
+            font-weight: bold;
+            border-bottom: none;
+            position: relative;
+            background-color: white!important;
+        }
+        #box dl.active dt:after{
+            position: absolute;
+            height: 2px;
+            width:100%;
+            background-color: #FF6600;
+            content: '';
+            left: 0;
+        }
+        #box dl.active dd{
+            display: block;
+        }
+        dl dd a, dl dd a:visited{
+            display: block;
+            line-height: 23px;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <dl class="active">
+        <dt>jquery 特效</dt>
+        <dd>
+            <a href="#">jquery 图片特效插件 异步读取图片TOP排行榜特效</a>
+            <a href="#">jquery 弹出层 点击按钮弹出层兼容IE和firefox浏览器</a>
+            <a href="#">jquery 导航插件 一个动画导航下拉菜单Apycom软件的Java下拉菜单</a>
+            <a href="#">jquery soChange 切换插件 支持焦点图片切换 选项卡切换 带按钮与分页索引按钮切换</a>
+            <a href="#">jquery 图片切换特效 鼠标点击左右按钮焦点图切换滚动</a>
+        </dd>
+    </dl>
+    <dl>
+        <dt>特效javascript</dt>
+        <dd>
+            <a href="#">javascript jscolor colorpicker js颜色选择器插件10多种调用颜色方法与取值</a>
+            <a href="#">javascript图片特效 网站banner制作焦点图片切换带按钮和固定图标控制图片左右滚动</a>
+            <a href="#">javascript滚动图片插件支持单排图片上下滚动、图片无缝滚动</a>
+            <a href="#">js多功能选项卡插件 选项卡自动切换内容图片延迟加载</a>
+            <a href="#">javascript滚动图片按钮控制图片左右自动滚动</a>
+        </dd>
+    </dl>
+    <dl>
+        <dt>特效div+css</dt>
+        <dd>
+            <a href="#">div+css制作非常实用的24款分页页码css代码</a>
+            <a href="#">用div+css3美化制作动画导航特效鼠标滑过动画显示</a>
+            <a href="#">用div+css制作纯CSS下拉菜单，兼容IE6 IE7 IE8及以上 Firefox</a>
+            <a href="#">CSS如何定位工程</a>
+            <a href="#">用div+css制作一个CSS3的泡泡动画按钮非常漂亮</a>
+        </dd>
+    </dl>
+    <dl>
+        <dt>教程HTML5特效</dt>
+        <dd>
+            <a href="#">jquery HTML5 幻灯片插件 用 Canvas 制作类似百叶窗拍摄快门摄影拍摄效果</a>
+            <a href="#">制作CSS3和HTML5的一个单页网站模板</a>
+            <a href="#">jquery 幻灯片切换应用一个HTML5的幻灯片</a>
+            <a href="#">jquery 图片滚动特效应用旋转幻灯片使用jQuery和CSS3</a>
+            <a href="#"></a>
+        </dd>
+    </dl>
+</div>
+<script>
+    //    判断dl是否为.active
+    //    清除方法
+    //    添加方法
+
+    var json={
+        id:'',
+        box:function(){
+          return  document.getElementById(this.id);
+        },
+        getDl:function(){
+            return this.box().getElementsByTagName('dl');
+        },
+        boxonclick:function(){
+            var _this=this;
+            this.box().onclick=function(ev){
+                if(!_this.isActive(ev)){
+                    _this.addActive(ev);
+                }
+            }
+        },
+        isActive:function(ev){
+            var oEvent=ev||event;
+            var target=oEvent.target||oEvent.srcElement;
+            var obj=target.parentNode;
+            if(obj.nodeName == 'DL' && obj.className == 'active'){
+                return true;
+            }else{
+                return false;
+            }
+        },
+        addActive:function(ev){
+            var oEvent=ev||event;
+//            代理事件
+            var target=oEvent.target||oEvent.srcElement;
+            var obj=target.parentNode;
+            if(obj.nodeName=='DL'){
+                this.clearActive();
+                obj.className='active';
+            }
+        },
+        clearActive:function(){
+            var oDl=this.getDl();
+            console.log(oDl.length);
+            for(var i=0;i<oDl.length;i++){
+                if(oDl[i].className == 'active'){
+                    oDl[i].className = '';
+                    break;
+                }
+            }
+        }
+
+    };
+
+    window.onload= function () {
+        json.id='box';//实例化
+        json.boxonclick();
+    }
+
+</script>
+<script src="../js/jquery.js"></script>
+</body>
+</html>

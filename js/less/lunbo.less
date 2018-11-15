@@ -1,0 +1,78 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-color: blanchedalmond;
+}
+#box{
+  width: 400px;
+  height: 500px;
+  margin: 50px auto 0;
+  position: relative;
+  overflow: hidden;
+  figure img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 370px;
+  }
+  ul{
+    position: absolute;
+    top: 370px;
+    left: 0;
+    height: 130px;
+    display: flex;
+    li{
+      border: 10px solid darkgray;
+      list-style: none;
+      width: 130px;
+      box-sizing: border-box;
+      border-right: none;
+      opacity: 0.6;
+      &:last-of-type{
+        border-right:10px solid darkgray;
+      }
+      img{
+        height: 110px;
+       width: 100%;
+      }
+    }
+  }
+  a{
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 370px;
+    z-index: 300;
+    opacity: 0;
+    &.markPrev{
+      left: 0;
+      background-color: salmon;
+
+    }
+    &.markNext{
+      right: 0;
+      background-color: skyblue;
+    }
+  }
+  >span{
+    position: absolute;
+    z-index: 301;
+    padding: 20px 30px;
+    font-size: 50px;
+    background-color: sandybrown;
+    top: 140px;
+    border-radius: 5px;
+    opacity: 0;
+    &.prev{
+      left: 15px;
+
+    }
+    &.next{
+      right: 15px;
+
+    }
+  }
+}

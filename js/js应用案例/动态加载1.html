@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            background-color: #d6ecf1;
+        }
+        #fdt{
+            width: 800px;
+            margin: 30px auto;
+        }
+    </style>
+</head>
+<body>
+<form action="#">
+    <fieldset id="fdt">
+        <legend>请选择你喜欢的歌星和你喜欢的歌曲</legend>
+    </fieldset>
+</form>
+<script src="../js/eventCompatible.js"></script>
+<script>
+    //    对象字面两：指定的规格创建新对象的表述法
+    var obj={
+//        key:value
+        许嵩:[{id:'101',name:'粉色信笺'},{id:'102',name:'尘世美'},{id:'103',name:'江湖'}],
+        林俊杰:[{id:'201',name:'一千年以后'},{id:'202',name:'简简单单'},{id:'203',name:'豆浆油条'}]
+    };
+    obj['周杰伦']=[{id:'301',name:'爱丁堡'},{id:'302',name:'轨迹'},{id:'303',name:'告白气球'}];
+   var fdt=document.getElementById('fdt');
+
+   for(var key in obj){
+       var oLabel=document.createElement('label');
+       oLabel.innerText='你选择的明星为：'+key;
+       var oSelect=document.createElement('select');
+       oSelect.className='star';
+       var option=new Option('-请选择-','-1');
+       oSelect.appendChild(option);
+       obj[key].forEach(function(el){
+           var option=new Option(el.name,el.id);
+           oSelect.appendChild(option);
+       });
+       oLabel.appendChild(oSelect);
+       fdt.appendChild(oLabel);
+   }
+    eventCompatible.agentEvent2(fdt,'change',['select','star'],function(){
+        var oParen=this.parentNode;
+        var op=oParen.innerText;
+        alert('你喜欢的歌星为:'+op+'歌曲号为：'+this.value);
+        alert('你喜欢的歌星为:'+op)
+    })
+</script>
+</body>
+</html>

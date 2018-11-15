@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            background-color: #ebe4ca;
+        }
+        .container{
+            width: 800px;
+            margin: 10px auto;
+        }
+        #adv{
+            height: 300px;
+            width: 700px;
+            overflow: hidden;
+        }
+        #adv img{
+            height: 350px;
+            width: 700px;
+        }
+        #advShort{
+            width: 700px;
+            height: 50px;
+            display: none;
+            background-color: sandybrown;
+            /*overflow: hidden;*/
+            position: relative;
+        }
+        #advShort img{
+            height: 50px;
+            width: 700px;
+        }
+        span{
+            background: url("../img/cha2.png") no-repeat center center;
+            background-size: 100%;
+            height: 15px;
+            width: 15px;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="adv">
+        <img src="../img/gao4.PNG" alt=""/>
+    </div>
+    <div id="advShort">
+        <img src="../img/gao3.PNG" alt=""/>
+        <span id="close"></span>
+    </div>
+    <img src="" alt=""/>
+</div>
+<script src="../js/jquery.js"></script>
+<script src="../js/move1.js"></script>
+<script>
+    window.onload=function(){
+        var oAdv=document.getElementById('adv');
+        var oAdvSmall=document.getElementById('advShort');
+        var oClose=document.getElementById('close');
+        startMove(oAdv,{height:373},function(){
+          var timer=setTimeout(function(){
+                startMove(oAdv,{height:50},function(){
+                    oAdv.remove();
+                    oAdvSmall.style.display='block';
+                });
+            },2000)
+        });
+        oClose.onclick=function(){
+           this.parentNode.remove();
+        }
+    };
+
+</script>
+
+</body>
+</html>

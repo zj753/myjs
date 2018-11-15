@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: skyblue;
+        }
+        body,html{
+            width: 100%;
+            height: 100%;
+        }
+        #box{
+            width: 1200px;
+            height: 600px;
+            margin: 20px auto 0;
+            perspective: 800px;
+            perspective-origin: 70% 50%;
+            position: relative;
+        }
+        #box>div{
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            transform-style: preserve-3d;
+            transform-origin: right;
+            transition: transform 1.5s;
+            animation-fill-mode: forwards;/*动画结束后保持什么状态*/
+            /*backface-visibility: hidden;*/
+        }
+
+        #box>div.left{
+            transform: rotateY(0deg);
+        }
+        #box>div.right{
+            transform: rotateY(180deg);
+        }
+        #box span{
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            padding: 10px;
+            border: 1px solid grey;
+            background-color: sandybrown;
+            box-shadow:0 0 5px rgba(0,0,0,.3) inset;
+            border-radius: 3px;
+            right: 0;
+        }
+        #box span.front{
+            padding-right: 20px;
+            border-right: none;
+
+        }
+        #box span.front:after{
+           position: absolute;
+            content: '';
+            width: 15px;
+            height: 70%;
+            top: 15%;
+            background-color: rgba(255,255,255,.3);
+            box-shadow: 0 0 5px 2px rgba(255,255,255,.5) inset;
+            right: 0;
+        }
+
+        #box span.back{
+            transform: rotateY(180deg);
+            padding-left: 20px;
+            border-left: 0;
+
+        }
+        #box span img{
+            width: inherit;
+            height: 90%;
+        }
+        #box span p{
+            font-size: 18px;
+            line-height: 3;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div  id="box">
+
+        <!--<div class="com left" arr-z="1">-->
+            <!--<span class="back">-->
+                <!--<img src="../img/feng1.jpg" alt="">-->
+                <!--<p>美丽风光无限：拍摄地：&#45;&#45;1/10</p>-->
+            <!--</span>-->
+            <!--<span class="front">-->
+                <!--<img src="../img/feng2.jpg" alt="">-->
+                <!--<p>美丽风光无限：拍摄地：&#45;&#45;2/10</p>-->
+            <!--</span>-->
+        <!--</div>-->
+
+</div>
+<template>
+    <div class="com left" arr-z="{z}" style="z-index:{z};">
+        <span class="back">
+            <img src="{path1}">
+            <p>{title1}--{page1}</p>
+        </span>
+        <span class="front">
+            <img src="{path2}">
+            <p>{title2}--{page2}</p>
+        </span>
+    </div>
+</template>
+<script src="../js/eventCompatible.js"></script>
+<script>
+    arr = [];
+    arr[arr.length] = {src: "../img/feng1.jpg", title: "美丽风光无限：拍摄地：北京"};
+    arr[arr.length] = {src: "../img/feng2.jpg", title: "美丽风光无限：拍摄地：三亚"};
+    arr[arr.length] = {src: "../img/feng3.jpg", title: "美丽风光无限：拍摄地：西湖"};
+    arr[arr.length] = {src: "../img/feng4.jpg", title: "美丽风光无限：拍摄地：上海"};
+    arr[arr.length] = {src: "../img/feng5.jpg", title: "美丽风光无限：拍摄地：云南"};
+    arr[arr.length] = {src: "../img/feng6.jpg", title: "美丽风光无限：拍摄地：广东"};
+    arr[arr.length] = {src: "../img/feng7.jpg", title: "美丽风光无限：拍摄地：江苏"};
+    arr[arr.length] = {src: "../img/feng8.jpg", title: "美丽风光无限：拍摄地：浙江"};
+    arr[arr.length] = {src: "../img/feng9.jpg", title: "美丽风光无限：拍摄地：三亚"};
+    arr[arr.length] = {src: "../img/feng10.jpg", title: "美丽风光无限：拍摄地：吉林"};
+    var str=document.querySelector('template').innerHTML;
+    var html='';
+    var oBox=document.getElementById('box');
+    var len=arr.length,zIndex=1;
+    for(var i=0;i<arr.length;i=i+2){
+        html+=str.replace('{path1}',arr[i].src).replace('{title1}',arr[i].title)
+                .replace('{page1}',i+1+'/'+len).replace('{path2}',arr[i+1].src).replace('{title2}',arr[i+1].title)
+                .replace('{page2}',i+2+'/'+len)
+    }
+    oBox.innerHTML=html;
+    eventCompatible.agentEvent2(oBox,'click',['div','com'],function(){
+        if(this.classList.contains('left')){
+            this.className='com right';
+        }else{
+            this.className='com left';
+        }
+        this.style.zIndex=zIndex++;
+    })
+
+
+</script>
+</body>
+</html>

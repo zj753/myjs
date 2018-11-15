@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table{
+            margin: 30px auto 0;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        td{
+            width: 80px;
+            height: 30px;
+        }
+        #sou{
+            width: 400px;
+            margin: 20px auto;
+        }
+        #sou input{
+            height: 25px;
+            opacity: .8;
+        }
+        #sou button{
+          padding: 5px 10px;
+      }
+    </style>
+</head>
+<script>
+    window.onload=function(){
+        var tab=document.getElementById('tab');
+        var row=tab.tBodies[0].rows;
+        var back='';
+        var text=document.getElementById('text');
+        var but=document.getElementById('but');
+        but.onclick=function(){
+            for(var i=1;i<tab.tBodies[0].rows.length;i++){
+                var tetname=text.value.toLowerCase();
+                var str=tetname.split(' ');
+                tab.tBodies[0].rows[i].style.background=back;
+                var tabname=tab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+                for(var j=0;j<str.length;j++){
+                    if(tabname.search(str[j])!=-1){
+                        tab.tBodies[0].rows[i].style.background='red';
+                    }
+                }
+
+            }
+
+        };
+//        for(var i=0;i<row.length;i++){
+//            row[i].onmouseover=function(){
+//                back=this.style.background;
+//                this.style.background='#de939f';
+//            };
+//            row[i].onmouseout=function(){
+//                this.style.background=back;
+//            };
+//            if(i%2){
+//                row[i].style.background='';
+//            }else{
+//                row[i].style.background='#dbbdbe';
+//            }
+//        }
+    }
+</script>
+<body>
+<div id="sou">
+    <input type="text" placeholder="请输入你的姓名进行搜索" id="text"/>
+   <button id="but">搜索</button>
+</div>
+<table border="1" id="tab">
+    <thead>
+    <tr>
+        <td>学号</td>
+        <td>姓名</td>
+        <td>数学</td>
+        <td>英语</td>
+        <td>语文</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>王晓晓</td>
+        <td>88</td>
+        <td>99</td>
+        <td>89</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>张丽</td>
+        <td>88</td>
+        <td>99</td>
+        <td>99</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>孙小小</td>
+        <td>93</td>
+        <td>99</td>
+        <td>89</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>张军</td>
+        <td>98</td>
+        <td>99</td>
+        <td>89</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>aaa</td>
+        <td>88</td>
+        <td>89</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>王军</td>
+        <td>88</td>
+        <td>89</td>
+        <td>100</td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="../js/jquery.js"></script>
+</body>
+</html>

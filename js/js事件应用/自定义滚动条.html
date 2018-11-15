@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义滚动条</title>
+    <style>
+        @font-face {
+            font-family: 'my_font';
+            src: url('../fonts/icomoon.eot') format('eot'),
+            url('../fonts/icomoon.svg') format('svg'),
+            url('../fonts/icomoon.ttf') format('ttf'),
+            url('../fonts/icomoon.woff') format('woff');
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .ma1{
+            height:450px;
+            width:100%;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #1cafed;
+        }
+        #box1,#box11{
+            width: 600px;
+            height: 20px;
+            background-color: #c3ccc8;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        #box2,#box22{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: palevioletred;
+        }
+        #box2{
+            background-color: #1cafed;
+        }
+        #box3{
+              height: 0;
+              width: 0;
+              background-color: skyblue;
+              margin: 20px auto;
+          }
+        #box4{
+            height:400px;
+            width: 400px;
+            background-color:palevioletred;
+            margin: 20px auto;
+            filter: alpha(opacity:0);
+            opacity: 0;
+        }
+        .ma2 h2{
+            color:palevioletred;
+        }
+        #box5{
+            height:400px;
+            width: 600px;
+            border: 1px solid darkgray;
+            margin: 20px auto;
+            position: relative;
+            text-align: justify;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        #box5:before,#box5:after{
+            position: absolute;
+            font-family: my_font;
+            font-size: 20px;
+            height: 20px;
+            width: 20px;
+            text-align: center;
+            line-height: 20px;
+            background: linear-gradient(90deg, #c4c4c4, darkgray 50%, #c4c4c4);
+            background-color: darkgray;
+            box-shadow: 0 1px 1px 1px darkgray;
+        }
+        #box5:before{
+            right: 0;
+            top: 0;
+            content: '\f0d8';
+        }
+        #box5:after{
+            right: 0;
+           bottom: 0;
+            content: '\f0d7';
+        }
+
+        p{
+            text-indent: 2em;
+        }
+        #box6{
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 20px 30px 20px 20px;
+
+        }
+        #box13{
+            width: 20px;
+            height: 400px;
+            background-color: #68cfff;
+            position: relative;
+            float: right;
+            background: linear-gradient(90deg, #a4f0ff, #68cfff 50%, #9be6ff);
+            box-shadow: 0px 1px 3px 1px darkgray;
+        }
+        #box23{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #1cafed;
+            background:linear-gradient( #1cafed, #1cbeff, #3ecaff) ;
+            box-shadow: 1px 1px 2px 0 darkgray;
+        }
+    </style>
+</head>
+<script>
+    window.onload=function(){
+        var box1=document.getElementById('box1');
+        var box2=document.getElementById('box2');
+        var box11=document.getElementById('box11');
+        var box22=document.getElementById('box22');
+        var box13=document.getElementById('box13');
+        var box23=document.getElementById('box23');
+        var box3=document.getElementById('box3');
+        var box4=document.getElementById('box4');
+        var box5=document.getElementById('box5');
+        var box6=document.getElementById('box6');
+        box2.onmousedown=function(ev){
+            var oEvent=ev||event;
+            var left=oEvent.clientX-box2.offsetLeft;
+            var top=oEvent.clienty-box2.offsetTop;
+            document.onmousemove=function(ev){
+                var oEvent=ev||event;
+                var n1=oEvent.clientX-left;
+                if(n1<0){
+                    n1=0;
+                }else
+                if(n1>box1.offsetWidth-box2.offsetWidth){
+                    n1=box1.offsetWidth-box2.offsetWidth;
+                }
+                box2.style.left=n1+'px';
+                var scale=n1/(box1.offsetWidth-box2.offsetWidth);
+                document.title=n1;
+                box3.style.height=400*scale+'px';
+                box3.style.width=400*scale+'px';
+            };
+            document.onmouseup=function(){
+                document.onmousemove=null;
+                document.onmouseup=null;
+            }
+        };
+        box22.onmousedown=function(ev){
+            var oEvent=ev||event;
+            var left=oEvent.clientX-box22.offsetLeft;
+            var top=oEvent.clienty-box22.offsetTop;
+            document.onmousemove=function(ev){
+                var oEvent=ev||event;
+                var n1=oEvent.clientX-left;
+                if(n1<0){
+                    n1=0;
+                }else
+                if(n1>box11.offsetWidth-box22.offsetWidth){
+                    n1=box11.offsetWidth-box22.offsetWidth;
+                }
+                box22.style.left=n1+'px';
+                var scale=n1/(box11.offsetWidth-box22.offsetWidth);
+                document.title=n1;
+                box4.style.filter='alpha(opacity:'+scale*100+')';
+                box4.style.opacity=scale;
+            };
+            document.onmouseup=function(){
+                document.onmousemove=null;
+                document.onmouseup=null;
+            }
+        };
+        box23.onmousedown=function(ev){
+            var oEvent=ev||event;
+            var top=oEvent.clientY-box23.offsetTop;
+            document.onmousemove=function(ev){
+                var oEvent=ev||event;
+                var n1=oEvent.clientY-top;
+                if(n1<0){
+                    n1=0;
+                }else
+                if(n1>box13.offsetHeight-box23.offsetHeight){
+                    n1=box13.offsetHeight-box23.offsetHeight;
+                }
+                box23.style.top=n1+'px';
+                var scale=n1/(box13.offsetHeight-box23.offsetHeight);
+                box6.style.top=-scale*(box6.offsetHeight-box5.offsetHeight)+'px';
+
+            };
+            document.onmouseup=function(){
+                document.onmousemove=null;
+                document.onmouseup=null;
+            };
+            return false;
+        }
+    }
+</script>
+<body>
+<div class="ma1">
+    <h2>改变高宽</h2>
+    <div id="box1">
+        <div id="box2"></div>
+    </div>
+    <div id="box3"></div>
+</div>
+<div class="ma1 ma2">
+    <h2>改变透明度</h2>
+    <div id="box11">
+        <div id="box22"></div>
+    </div>
+    <div id="box4"></div>
+</div>
+<div class="ma1 ma3">
+    <h2>滚动条</h2>
+    <div id="box5">
+        <div id="box6">
+           <p>生命里，一些缱绻，无论素净，还是喧哗，都已经被岁月赋予了清喜的味道，
+               一些闲词，或清新，或淡雅，总会在某一个回眸的时刻醉了流年，濡湿了柔软的心，冥冥之中，我们沿着呼唤的风声，终于在堆满落花的秋里，再次重逢，念在天涯，心在咫尺，我相信，一米阳光，才是我们最好的距离。</p>
+            <p>缘起是诗，缘离是画，这些关于岁月，关于记忆的章节，终会被时光搁置在无法触及的红尘之外，曾经，你我一别经年，可风里，总有一段美丽会与我们不期而遇，一盏琉璃，半杯心悦，端然着那一份醉人的静，这安静行走的流年，总会被过往赋予一份清喜，一份浪漫。</p>
+            或许，习惯了着布衣素颜，让清心若雪，
+            不喜张扬，不畏喧哗，守着一怀自己的素韵安静，在自己心中的半亩桃源，修篱种菊，喜欢与山水相依，与流水对话，让文字的墨香，依附在心灵的每一个角落，也喜欢，在闲时，端坐时光一隅，将一本书读到无字，将一盏茶喝到无味，将一个故事看到流泪.……心染尘香，不须有多少的柔情话语去讲，只要能够念起，便是一份温暖。
+            再打开记忆的栅栏，取一壶往昔，与流年对坐，情有多深，心就有多疼，触不到的可惜，在挥手袖的风里滋养着忧伤，捻一缕清芬，看三千浮华，历历往事，素淡清雅，研一池墨香，植于眉心，相遇如梦，一直充满虔诚的无暇，这个十月，我用满怀的深情，打开文字的苍白，灵动的心事，穿过岁月的轩窗，迎面而来，我未曾离开，为何不见了原来这世间的繁华与葱笼？是时光的无情，还是流年容易沧桑，让所有的一切都如逝水匆匆，去了遥远的天涯？
+            从此，我只想，淡泊一份宁静，让心中盈满诗意，只为赴你早就许下的盟誓，你不来，我怎么会轻易离开？一直，我喜欢叶落的静美，梦想着有一天和你一起看云水长天。我说：我韶华已老，岁月早已沧桑，已习惯了静默着独舞忧伤，然，这一眼凝眸，却注定得一世相随！或许我会静静陪你看一生的细水长流。
+            静默，看一场烟花如何绚烂自己的一生，忽然发现，我的梦想，有些什么已悄然变了，呼出的想念里，夏已调谢，秋已深浓，空气里有雨过的清新，却让秋沾染了好些沧桑的凉。一场花开的邂逅，静美了多少无言的守望？一帘烟雨的轮回，成全了多少天涯的相依？梦里天涯，许多人，终要忘记；许多事，总会随风，那些忧伤和叹息的深夜，依然会被突如其来的喧嚣触痛，我的星月，我的花开，曾经悄然用心铭刻，却也被时光的沙漏，渐渐滤去最初的繁华。
+        </div>
+        <div id="box13">
+            <div id="box23"></div>
+        </div>
+    </div>
+
+</div>
+<script src="../js/jquery.js"></script>
+</body>
+</html>

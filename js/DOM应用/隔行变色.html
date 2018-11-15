@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table{
+            margin: 30px auto 0;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        td{
+            width: 80px;
+            height: 30px;
+        }
+    </style>
+</head>
+<script>
+    window.onload=function(){
+        var tab=document.getElementById('tab');
+        var row=tab.tBodies[0].rows;
+        var back='';
+        for(var i=0;i<row.length;i++){
+            row[i].onmouseover=function(){
+                back=this.style.background;
+                this.style.background='#de939f';
+            };
+            row[i].onmouseout=function(){
+                this.style.background=back;
+            };
+            if(i%2){
+                row[i].style.background='';
+            }else{
+                row[i].style.background='#dbbdbe';
+            }
+        }
+    }
+</script>
+<body>
+<table border="1" id="tab">
+    <thead>
+    <tr>
+        <td>姓名</td>
+        <td>学号</td>
+        <td>数学</td>
+        <td>英语</td>
+        <td>语文</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>王晓晓</td>
+        <td>1</td>
+        <td>88</td>
+        <td>99</td>
+        <td>89</td>
+    </tr>
+    <tr>
+        <td>张丽</td>
+        <td>2</td>
+        <td>88</td>
+        <td>99</td>
+        <td>99</td>
+    </tr>
+    <tr>
+        <td>孙小小</td>
+        <td>3</td>
+        <td>93</td>
+        <td>99</td>
+        <td>89</td>
+    </tr>
+    <tr>
+        <td>张军</td>
+        <td>4</td>
+        <td>98</td>
+        <td>99</td>
+        <td>89</td>
+    </tr>
+    <tr>
+        <td>王军</td>
+        <td>5</td>
+        <td>88</td>
+        <td>89</td>
+        <td>100</td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="../js/jquery.js"></script>
+</body>
+</html>

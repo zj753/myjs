@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #diva{
+            width: 100px;
+            height: 100px;
+            background-color: salmon;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+
+    </style>
+    <script>
+        window.onscroll=function(){
+            var diva=document.getElementById('diva');
+           var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+            startmove(parseInt((document.documentElement.clientHeight-diva.offsetHeight)/2+scrollTop));
+        };
+     var timer=null;
+        function startmove(itarget){
+            var diva=document.getElementById('diva');
+            clearInterval(timer);
+            timer=setInterval(function(){
+                var speed=(itarget-diva.offsetTop)/6;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                if(diva.offsetTop==itarget){
+                    clearInterval(timer);
+                }else{
+                    diva.style.top=diva.offsetTop+speed+'px';
+                }
+            },30);
+        }
+    </script>
+
+</head>
+<body style="height: 2000px">
+<div id="diva" >
+
+</div>
+<script src="../js/jquery.js"></script>
+</body>
+</html>

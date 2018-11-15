@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <link rel="stylesheet" href="../css/register.css"/>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <title>注册页</title>
+    <link rel="stylesheet" href="../css/register.css"/>
+</head>
+<body>
+<div class="container" id="box">
+    <h3>注册</h3>
+
+    <form action="#" method="post">
+        <label>登录邮箱 <input type="email" class="email"/><i><span>邮箱格式不正确</span></i></label>
+        <label>登录密码 <input type="password"/><i><span>请输入6-16位密码，区分大小写，不能使用空格</span></i></label>
+        <label>用户昵称 <input type="text" class="name"/></label>
+        <label>用户密码 <input type="number"/></label>
+        <label>验证码<input type="text"/>
+            <img src="../img/yzm.jpg" alt=""/>
+        </label>
+       <input type="checkbox" class="remember" />记住用户邮箱和用户名 <br/>
+        <input type="checkbox" checked/>我已阅读并同意 <a href="#">相关协议</a><br/>
+        <button>立即注册</button>
+    </form>
+</div>
+</body>
+
+<script>
+    window.onload=function(){
+        var oBox=document.getElementById('box');
+        var oBtn=document.querySelector('div.container button');
+        var oEml=oBox.querySelector('.email');
+        var oName=oBox.querySelector('.name');
+        var oChk=oBox.querySelector('.remember');
+        oBtn.onclick=function(){
+            if(oChk.checked){
+                setCookie('oE',oEml.value,14);
+                setCookie('oN',oName.value,14);
+            }
+ else{
+                removeCookie('oE');
+                removeCookie('oN');
+            }
+        };
+
+            oEml.value=getCookie('oE');
+            oName.value=getCookie('oN');
+    }
+
+</script>
+<script src="../js/jquery.js"></script>
+<script src="../js/cookie.js"></script>
+</html>

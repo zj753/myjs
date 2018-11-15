@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微博发表效果</title>
+    <style>
+        @font-face {
+            font-family: 'my_font';
+            src: url('../fonts/icomoon.eot') format('eot'),
+            url('../fonts/icomoon.svg') format('svg'),
+            url('../fonts/icomoon.ttf') format('ttf'),
+            url('../fonts/icomoon.woff') format('woff');
+            font-style: normal;
+            font-weight: normal;
+        }
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background: linear-gradient(#63B5DD,#8BBDDE,#AED6EF,#B4DAF0);
+        }
+        #main{
+            width: 600px;
+            height: 700px;
+            margin: 50px auto;
+            box-sizing: border-box;
+        }
+       .to{
+           width: 100%;
+           background-color: white;
+           margin: auto;
+           padding: 10px;
+           box-sizing: border-box;
+           margin-bottom: 15px;
+           border: 1px solid #CCCCCC;
+           box-shadow: 1px 1px 1px 0 #a9a9a9;
+
+       }
+       #top{
+        width: 100%;
+       }
+       #btn{
+           display: inline-block;
+           padding: 5px 20px;
+           background-color: #FFC09F;
+           color: white;
+           outline: none;
+           border: none;
+           border: 1px solid #FBBD9E;
+           margin-top: -5px;
+       }
+       p{
+           font-size: 15px;
+           color: #F08977;
+           font-weight: 400;
+           margin-bottom: 8px;
+       }
+        ul{
+            height: 520px;
+            width: 600px;
+            border: 1px solid #CCCCCC;
+            list-style: none;
+            /*overflow: hidden;*/
+            background-color: white;
+            box-shadow: 1px 1px 1px 0 #a9a9a9;
+            padding: 5px;
+            box-sizing: border-box;
+
+
+        }
+        li{
+            border-bottom: dashed 1px silver;
+            padding: 10px;
+            margin: 0;
+            filter: alpha(opacity:0);
+            opacity: 0;
+            display: flex;
+
+        }
+       li p{
+            word-wrap:break-word;
+            align-self: flex-start;
+             width: 400px;
+           margin-left: 20px;
+        }
+
+        li a img{
+            height: 100px;
+            width: 100px;
+            border-radius: 50px;
+        }
+        aside{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+
+        }
+        aside a{
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+            padding-left: 30px;
+
+        }
+        aside a:last-child{
+            padding-left: 10px;
+        }
+        aside a:before{
+             position: absolute;
+             font-family: 'my_font';
+             margin-top: 2px;
+             margin-left: -24px;
+            font-size: 19px;
+         }
+        aside a:first-child:before{
+            content: '\f118';
+            color: #FF9000;
+        }
+        aside a:nth-child(2):before{
+            content: '\f03e';
+            color: #89B166;
+        }
+        aside a:nth-child(3):before{
+            content: '\f03d';
+            color: #54A8E5;
+        }
+        aside a:nth-child(4):before{
+            content: '\f00b';
+            color: #4579D8;
+        }
+        aside a:nth-child(5):before{
+            content: '\f091';
+            color: #FF8200;
+        }
+        aside a:hover,aside a:active{
+            color: #F08977;
+        }
+    </style>
+</head>
+<script>
+    window.onload=function(){
+        var top=document.getElementById('top');
+        var btn=document.getElementById('btn');
+        var oUl=document.getElementsByTagName('ul')[0];
+        btn.onclick=function(){
+            var oLi=document.createElement('li');
+            oLi.innerHTML="<a><img src='../img/cha1.jpg' alt=''/></a><p>"+top.value+"</p>";
+//            oLi.innerHTML=top.value;
+            top.value='';
+            var lis=oUl.getElementsByTagName('li');
+            if(lis.length>0){
+                oUl.insertBefore(oLi,lis[0]);
+            }else{
+                oUl.appendChild(oLi);
+            }
+//             oLi.style.height='0';
+            startMove(oLi,{height:oLi.offsetHeight},function(){
+               startMove(oLi,{opacity:100})
+            })
+        }
+    }
+</script>
+<body>
+<div id="main">
+    <div class="to">
+        <p>有什么有趣的事情跟大家分享吗？</p>
+        <textarea  cols="30" rows="6" id="top"></textarea>
+         <aside>
+             <div>
+                 <a href="#">表情</a>
+                 <a href="#">图片</a>
+                 <a href="#">视频</a>
+                 <a href="#">话题</a>
+                 <a href="#">头条文章</a>
+                 <a href="#">more</a>
+             </div>
+             <input type="button"  id="btn" value="发布"/>
+         </aside>
+    </div>
+
+
+    <ul>
+
+    </ul>
+</div>
+<script src="../js/move1.js"></script>
+<script src="../js/jquery.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+@charset "UTF-8";
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: #EDEFF0;
+}
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+.container h3 {
+    background-color: #BE3948;
+    padding: 17px 0 17px 30px;
+    color: white;
+    font-weight: normal;
+}
+.container form {
+    padding: 107px 232px 80px 300px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+}
+.container form label:first-child i {
+    color: #BE3948;
+    background: url("../img/icon.gif") no-repeat;
+    background-position: 0 2px;
+}
+.container form label:first-child i span {
+    margin-left: 13px;
+}
+.container form img {
+    vertical-align: top;
+}
+.container form label {
+    color: #1e1e1e;
+    display: block;
+}
+.container form label input {
+    outline: none;
+    height: 40px;
+    width: 270px;
+    border: 1px solid #CCCCCC;
+    margin-bottom: 26px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.container form label:not( :nth-child(4)):before {
+    content: "*";
+    color: red;
+    position: absolute;
+    margin-left: -12px;
+    margin-top: 14px;
+}
+.container form label:nth-child(5) input {
+    margin-left: 28px;
+    width: 201px;
+}
+.container form input:nth-child(6),.container form input:nth-child(8),
+.container form button {
+    margin-left: 70px;
+}
+.container form input:nth-child(8){
+    margin-top: 10px;
+}
+.container form button {
+    margin-top: 30px;
+    padding: 10px 50px;
+    outline: none;
+    border: none;
+    background-color: #ea5a47;
+}
+.container form button:hover {
+    background-color: #e87d73;
+    color: white;
+}

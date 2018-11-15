@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: #f4e3cd;
+        }
+        div#time{
+            width: 610px;
+            height: 610px;
+            margin: 50px auto;
+            border: 2px solid #0A246A;
+            border-radius: 50%;
+            position: relative;
+            background: url("../img/zhongbg.jpg") no-repeat;
+            background-size: cover;
+        }
+        div#time span{
+            position: absolute;
+            width: 14px;
+            left: calc(50% - 7px);
+        }
+        div#time span#t1{
+            height: 310px;
+            top: 0;
+            transform-origin: center 300px;
+            background: url("../img/timg_h.png");
+            z-index: 10;
+        }
+        div#time span#t2{
+            height: 280px;
+            top: 30px;
+            transform-origin: center 270px;
+            background-color:white;
+            z-index: 6;
+            box-shadow: 0 0 1px 1px grey;
+        }
+        div#time span#t3{
+            height: 250px;
+            top: 60px;
+            transform-origin: center 240px;
+            background-color: white;
+            box-shadow: 0 0 1px 1px grey;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+<div id="time">
+    <span id="t1"></span>
+    <span id="t2"></span>
+    <span id="t3"></span>
+</div>
+<script>
+   var oBox=document.getElementById('time');
+    var aSpan=oBox.querySelectorAll('span');
+    var h, m, s,now;
+    var timer=null;
+    setInterval(move,1000);
+    move();
+    function move(){
+        now=new Date();
+        h=now.getHours();
+        m=now.getMinutes();
+        s=now.getSeconds();
+        aSpan[0].style.transform='rotate('+s*6+'deg)';
+        aSpan[1].style.transform='rotate('+m*6+'deg)';
+        aSpan[2].style.transform='rotate('+h*30+'deg)';
+    }
+</script>
+</body>
+</html>

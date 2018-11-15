@@ -1,0 +1,148 @@
+@charset "UTF-8";
+*{
+  padding: 0;
+  margin: 0;
+}
+main{
+  position: fixed;
+  bottom: 0;
+  height: 500px;
+  width: 500px;
+  right: 50px;
+  overflow: hidden;
+  z-index: 9;
+
+}
+#button{
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  font-family: 'my_font';
+  font-size: 26px;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid #CED3D6;
+  //background: linear-gradient(#EBECEE,#D4D9DC,#D9DEE1);
+  background-color: #AAB6C2;
+  cursor: pointer;
+}
+
+#top{
+  height: 255px;
+  width: 250px;
+  border: 5px solid #52BAE3;
+  position: absolute;
+  bottom: -240px;
+  right: 0;
+ display: none;
+  z-index: 8;
+  background: linear-gradient(#1FA7E1,#3CB4E8,#60C1EC);
+  box-sizing: border-box;
+
+}
+#right{
+  height: 50px;
+  width: 200px;
+  border: 1px solid #CED3D6;
+  position: absolute;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+ right: -200px;
+  bottom: 0;
+  z-index: 9;
+  background: linear-gradient(#EBECEE,#D4D9DC,#D9DEE1);
+  p{
+    font-size: 15px;
+    color: #95A2A8;
+    text-align: center;
+    &:first-of-type{
+      color: #748A9F;
+      font-weight: bold;
+      font-size: 20px;
+
+    }
+  }
+}
+@font-face {
+  font-family: 'my_font';
+  src: url('../fonts/icomoon.eot') format('eot'),
+  url('../fonts/icomoon.svg') format('svg'),
+  url('../fonts/icomoon.ttf') format('ttf'),
+  url('../fonts/icomoon.woff') format('woff');
+  font-style: normal;
+  font-weight: normal;
+}
+a:after{
+  display: inline-block;
+  font-family: 'my_font';
+  content: '\f00d';
+  position: absolute;
+  color: red;
+  margin-top: 1px;
+  margin-left: 225px;
+  border: 1px solid gray;
+  border-radius: 8px;
+}
+.to,.mid,.bot{
+  border-right: 1px white solid;
+  border-left: 1px solid white;
+  display: flex;
+  color: white;
+  justify-content: space-around;
+}
+.mid,.bot{
+  p{
+    font-size: 14px;
+  }
+
+}
+.left{
+ flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.right{
+flex: 1;
+  padding: 10px 0 ;
+}
+.to{
+  border-top:1px white solid;
+  height: 100px;
+  width: 100%;
+  background: linear-gradient(#1FA7E1,#3CB4E8,#60C1EC);
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.to .right{
+  h3{
+    font-size: 24px;
+  }
+  span{
+    font-size: 14px;
+    margin-left: 10px;
+  }
+}
+.mid{
+  height: 70px;
+  width: 100%;
+  background: linear-gradient(#075083,#1E7CAF,#37A7D7);
+  .right{
+    padding: 5px 0;
+  }
+}
+.bot{
+  height: 70px;
+  width: 100%;
+  background: linear-gradient(#F8D7A1,#F4CD8A,#EBBD67);
+  border-bottom: 1px white solid;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缓冲运动</title>
+    <style>
+        #div3{
+            background-color: skyblue;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            left: 20px;
+            top: 50px;
+        }
+
+    </style>
+</head>
+<script>
+    window.onload=function(){
+        var but=document.getElementById('button');
+        but.onclick=function(){
+            mousemv(300);
+        }
+    };
+    var timer=null;
+    function mousemv(itarget){
+        var div3=document.getElementById('div3');
+        clearInterval(timer);
+        timer=setInterval(function(){
+           var speed=(itarget-div3.offsetLeft)/10;
+            speed=(div3.offsetLeft<itarget)?Math.ceil(speed):Math.floor(speed);
+            if(div3.offsetLeft==itarget){
+                clearInterval(timer);
+            }else{
+                div3.style.left=div3.offsetLeft+speed+'px';
+            }
+        },30);
+
+    }
+</script>
+<body>
+<main>
+    <button id="button">开始</button>
+    <div id="div3"></div>
+</main>
+
+<script src="../js/jquery.js"></script>
+</body>
+</html>

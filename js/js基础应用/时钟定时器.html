@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定时器</title>
+    <style>
+        body{
+            background-color: pink;
+            font-size: 50px;
+            color:#F15D15;
+        }
+        div{
+            width: 900px;
+            margin: 50px auto;
+            display: flex;
+        }
+        span{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+        }
+    </style>
+</head>
+<script>
+    window.onload=function(){
+        var aImg=document.getElementsByTagName('img');
+        function time(){
+            var oDate=new Date();
+            var str=getDouble(oDate.getHours())+getDouble(oDate.getMinutes())+getDouble(oDate.getSeconds());
+            for(var i=0;i<aImg.length;i++){
+                aImg[i].src='../img/'+str.charAt(i)+'.png';
+            }
+        }
+        setInterval(time,1000);
+        time();
+
+    };
+
+//    转化为两位数
+    function getDouble(n){
+        if(n<10){
+            return '0'+n;
+        }else{
+            return ''+n;
+        }
+    }
+</script>
+<body>
+<div>
+    <img src="../img/1.png" alt=""/>
+    <img src="../img/1.png" alt=""/>
+    <span>:</span>
+    <img src="../img/1.png" alt=""/>
+    <img src="../img/1.png" alt=""/>
+    <span>:</span>
+    <img src="../img/1.png" alt=""/>
+    <img src="../img/1.png" alt=""/>
+</div>
+
+<script src="../js/jquery.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        img{
+            position: absolute;
+            height: 50px;
+            width: 50px;
+        }
+
+    </style>
+</head>
+<script>
+    function  getpos(ev){
+        var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+        var scrollLeft=document.documentElement.scrollLeft||document.body.scrollLeft;
+        return {x: ev.clientX+scrollLeft,y: ev.clientY+scrollTop};
+    }
+    window.onload=function(){
+        var imgs=document.getElementsByTagName('img');
+        for(var j=0;j<imgs.length;j++){
+            imgs[j].style.height=imgs[j].offsetHeight+5*j+'px';
+            console.log(j+imgs[j].style.height);
+            imgs[j].style.width=imgs[j].offsetWidth+5*j+'px';
+        }
+        document.onmousemove=function(ev){
+            var oEvent=ev||event;
+            pos=getpos(oEvent);
+            for(var i=0;i<imgs.length-1;i++){
+                imgs[i].style.left=imgs[i+1].offsetLeft+'px';
+                imgs[i].style.top=imgs[i+1].offsetTop+'px';
+            }
+
+          imgs[imgs.length-1].style.left=pos.x-50+'px';
+            imgs[imgs.length-1].style.top=pos.y-50+'px';
+        }
+
+    }
+</script>
+<body>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+<img src="/img/maomi.png" alt=""/>
+<img src="../img/maomi.png" alt=""/>
+
+
+<script src="../js/jquery.js"></script>
+</body>
+</html>

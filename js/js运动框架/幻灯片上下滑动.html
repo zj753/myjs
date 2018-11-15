@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/hua.css"/>
+</head>
+<script>
+    window.onload=function(){
+        oUl=document.getElementsByTagName('ul')[0];
+        oLi=oUl.getElementsByTagName('li');
+        oOl=document.getElementsByTagName('ol')[0];
+        oLi2=oOl.getElementsByTagName('li');
+        var now=0;
+        for(var i=0;i<oLi2.length;i++){
+            oLi2[i].index=i;
+            oLi2[i].onclick=function(){
+                now=this.index;
+                tab();
+        }
+        }
+        function tab(){
+            for(var j=0;j<oLi2.length;j++){
+                oLi2[j].className='';
+            }
+            oLi2[now].className='active';
+            startMove(oUl,{top:-235*now});
+        }
+        function next(){
+            now++;
+            if(now==oLi2.length){
+                now=0;
+            }
+            tab();
+        }
+        setInterval(next,2000);
+    }
+</script>
+<body>
+<div id="box">
+    <ul>
+        <li><a href="#"><img src="../img/hua1.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="../img/hua2.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="../img/hua3.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="../img/hua4.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="../img/hua5.jpg" alt=""/></a></li>
+    </ul>
+    <ol>
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ol>
+</div>
+<script src="../js/jquery.js"></script>
+<script src="../js/move1.js"></script>
+</body>
+</html>

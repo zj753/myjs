@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table{
+            margin: 30px auto 0;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        td{
+            width: 80px;
+            height: 30px;
+        }
+        .ti{
+           width: 500px;
+            margin: 20px auto;
+        }
+       input{
+           width: 60px;
+       }
+    </style>
+</head>
+<script>
+    window.onload=function(){
+        var tab=document.getElementById('tab');
+        var row=tab.tBodies[0].rows;
+        var back='';
+        var number=tab.tBodies[0].rows.length+1;
+        button.onclick=function(){
+            var name=document.getElementById('name');
+            var math=document.getElementById('math');
+            var english=document.getElementById('english');
+            var chinese=document.getElementById('chinese');
+            var button=document.getElementById('button');
+            var tra=document.createElement('tr');
+            var tda=document.createElement('td');
+            tda.innerHTML=number++;
+            tra.appendChild(tda);
+            var tda=document.createElement('td');
+            tda.innerHTML=name.value;
+            tra.appendChild(tda);
+            var tda=document.createElement('td');
+            tda.innerHTML=math.value;
+            tra.appendChild(tda);
+            var tda=document.createElement('td');
+            tda.innerHTML=english.value;
+            tra.appendChild(tda);
+            var tda=document.createElement('td');
+            tda.innerHTML=chinese.value;
+            tra.appendChild(tda);
+            var tda=document.createElement('td');
+            tda.innerHTML='<a href="javascript:;">删除</a>';
+            tra.appendChild(tda);
+            tab.tBodies[0].appendChild(tra);
+//            删除行
+            tda.getElementsByTagName('a')[0].onclick=function(){
+                tab.tBodies[0].removeChild(this.parentNode.parentNode);
+                for(var i=0;i<row.length;i++){
+                    row[i].onmouseover=function(){
+                        back=this.style.background;
+                        this.style.background='#de939f';
+                    };
+                    row[i].onmouseout=function(){
+                        this.style.background=back;
+                    };
+                    if(i%2){
+                        row[i].style.background='';
+                    }else{
+                        row[i].style.background='#dbbdbe';
+                    }
+
+
+                }
+            };
+            for(var i=0;i<row.length;i++){
+                row[i].onmouseover=function(){
+                    back=this.style.background;
+                    this.style.background='#de939f';
+                };
+                row[i].onmouseout=function(){
+                    this.style.background=back;
+                };
+                if(i%2){
+                    row[i].style.background='';
+                }else{
+                    row[i].style.background='#dbbdbe';
+                }
+
+
+            }
+        };
+        for(var i=0;i<row.length;i++){
+            row[i].onmouseover=function(){
+                back=this.style.background;
+                this.style.background='#de939f';
+            };
+            row[i].onmouseout=function(){
+                this.style.background=back;
+            };
+            if(i%2){
+                row[i].style.background='';
+            }else{
+                row[i].style.background='#dbbdbe';
+            }
+
+
+        }
+    }
+</script>
+<body>
+<div class="ti">
+    姓名<input type="text" id="name" />
+    数学 <input type="text" id="math"/>
+    英语 <input type="text" id="english"/>
+    语文 <input type="text" id="chinese"/>
+    <input type="button" value="添加" id="button"/>
+</div>
+
+
+<table border="1" id="tab">
+    <thead>
+    <tr>
+        <td>学号</td>
+        <td>姓名</td>
+        <td>数学</td>
+        <td>英语</td>
+        <td>语文</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>王晓晓</td>
+        <td>88</td>
+        <td>99</td>
+        <td>89</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>张丽</td>
+        <td>88</td>
+        <td>99</td>
+        <td>99</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>孙小小</td>
+        <td>93</td>
+        <td>99</td>
+        <td>89</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>张军</td>
+        <td>98</td>
+        <td>99</td>
+        <td>89</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>王军</td>
+        <td>88</td>
+        <td>89</td>
+        <td>100</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="../js/jquery.js"></script>
+</body>
+</html>

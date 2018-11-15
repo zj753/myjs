@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片轮播播放器</title>
+    <link rel="stylesheet" href="../css/lunbo.css"/>
+</head>
+<body>
+<div id="box">
+    <figure>
+        <img src="../img/lun1.jpg" alt="" />
+        <img src="../img/lun2.jpg" alt=""/>
+        <img src="../img/lun3.jpg" alt=""/>
+        <img src="../img/lun4.jpg" alt=""/>
+        <img src="../img/lun5.jpg" alt=""/>
+    </figure>
+    <span class="prev">&lt;</span>
+    <span class="next">&gt;</span>
+    <a href="#" class="markPrev"></a>
+    <a href="#" class="markNext"></a>
+    <ul>
+        <li><img src="../img/lun1.jpg" alt=""  style="z-index: 0"/></li>
+        <li><img src="../img/lun2.jpg" alt=""/></li>
+        <li><img src="../img/lun3.jpg" alt=""/></li>
+        <li><img src="../img/lun4.jpg" alt=""/></li>
+        <li><img src="../img/lun5.jpg" alt=""/></li>
+    </ul>
+</div>
+<script>
+    window.onload=function(){
+        var prev=document.getElementsByClassName('prev')[0];
+        var next=document.getElementsByClassName('next')[0];
+        var markPrev=document.getElementsByClassName('markPrev')[0];
+        var markNext=document.getElementsByClassName('markNext')[0];
+        var oFigure=document.getElementsByTagName('figure')[0];
+        var fImg=oFigure.getElementsByTagName('img');
+        var oUl=document.getElementsByTagName('ul')[0];
+        var uLi=oUl.getElementsByTagName('li');
+        var now=0;
+        var zindex=1;
+//        上部鼠标移入移出
+        markPrev.onmouseover=prev.onmouseover=function(){
+          startMove(prev,{opacity:100});
+        };
+        markPrev.onmouseout=prev.onmouseout=function(){
+            startMove(prev,{opacity:0});
+        };
+        markNext.onmouseover=next.onmouseover=function(){
+            startMove(next,{opacity:100});
+        };
+        markNext.onmouseout=next.onmouseout=function(){
+            startMove(next,{opacity:0});
+        };
+// 下部鼠标移入移出
+
+        for(var i=0;i<uLi.length;i++){
+            uLi[i].index=i;
+            uLi[i].onmouseover=function(){
+                if(now==this.index) return;
+                now=this.index;
+             tab();
+
+        };
+        function tab(){
+            for(var j=0;j<uLi.length;j++){
+                startMove(uLi[now],{opacity:100});
+            }
+            fImg[now].style.cssText='z-index:'+(++zindex)+';height:0';
+            startMove( fImg[now],{height:370});
+            if(now==0){
+                startMove(oUl,{left:0});
+            }else if(noe==uLi.length-1){
+                startMove(oUl,{left:-(now-2)*oLi[0].offsetWidth});
+            }else{
+                startMove(oUl,{left:-(now-1)*oLi[0].offsetWidth});
+            }
+
+        }
+        uLi[i].onmouseout=function(){
+            for(var j=0;j<uLi.length;j++){
+                startMove(this,{opacity:60});
+            }
+        }
+        }
+        prev.onclick=function(){
+            now--;
+            if(now==-1){
+                now=fImg.length-1;
+            }
+         tab();
+        };
+        next.onclick=function(){
+            now++;
+            if(now==fImg.length){
+                now=0;
+            }
+            tab();
+
+        }
+    }
+</script>
+<script src="../js/move1.js"></script>
+<script src="../js/jquery.js"></script>
+</body>
+</html>

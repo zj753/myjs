@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0; padding: 0}
+        body{
+            background-color:#F9FBED;
+            background: linear-gradient(white,#FBFDF2,#F7F9E1,#F3F7D2);
+            height: 800px;
+        }
+        div.bo{
+            background: url("../img/bain1.PNG") no-repeat;
+            height: 500px;
+            margin:  auto;
+            width: 650px;
+           padding-top: 150px;
+            box-shadow: 0 0 1px 1px #c1c1c1;
+
+        }
+        div.box{
+            width: 310px;
+            height: 280px;
+            /*margin: 100px auto 0;*/
+            /*border: 1px solid black;*/
+            overflow-y: hidden;
+            padding: 15px 10px;
+            margin: auto;
+
+        }
+        div.box ul{
+            list-style: none;
+            line-height: 40px;
+        }
+        div.box ul li{
+            width: 100%;
+        }
+        div.box ul li a{
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
+        }
+        div.box ul a,div.box ul a:visited{
+            text-decoration: none;
+            color: #004400;
+
+        }
+        div.box ul a:hover{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="bo">
+    <div class="box" id="box">
+        <ul>
+            <!--<li><a href="{href}">{no}.{txt}</a></li>-->
+        </ul>
+    </div>
+</div>
+
+<script>
+    window.onload=function(){
+    var data = [];
+    data[data.length] = {href: 'http://www.baidu.com', con: '意大利一列区间火车脱轨受损严重 列车司机受重伤'};
+    data[data.length] = {href: 'http://www.cqwu.edu.cn', con: '多米尼加驻华代表:2012年就想跟台湾断交'};
+    data[data.length] = {href: 'http://www.qq.com', con: '纽约一名26岁华人女子失踪 警方呼吁民众帮助寻找'};
+    data[data.length] = {href: 'http://www.163.com', con: '韩国军方人士:捕捉到朝鲜拆除扩音喊话设备迹象'};
+    data[data.length] = {href: 'http://www.sina.com', con: 'Uber曝惊天丑闻:美国103名司机涉性侵或性虐乘客'};
+    data[data.length] = {href: 'http://www.sina.com', con: '中国留学生江玥被枪杀案:嫌犯审判日期推迟至下月'};
+    data[data.length] = {href: 'http://www.cqw.edu.cn', con: '特别检察官想问特朗普50个问题 全被美媒泄露了'};
+    data[data.length] = {href: 'http://www.google.com', con: '印度一辆汽车跌入冲沟 造成至少6人死亡10人受伤'};
+    var box=document.getElementById('box');
+    var ul=box.querySelector('ul');
+    var html='';
+    data.forEach(function(el,i){
+        html+='<li><a href='+el.href+'>'+(i+1)+'.'+el.con+'</a></li>';
+    });
+    ul.innerHTML=html;
+    var ull=ul.cloneNode(true);
+    var timer=null;
+        var top;
+    box.appendChild(ull);
+    function move(){
+       timer=setInterval(function(){
+            top=box.scrollTop;
+            if(box.scrollTop<ul.offsetHeight){
+                box.scrollTo(0,++top);
+            }else{
+                box.scrollTo(0,0);
+            }
+
+        },30)
+    }
+    move();
+    box.onmouseover=function(){
+        clearInterval(timer);
+    };
+    box.onmouseout=function(){
+        move();
+    }
+    }
+</script>
+</body>
+</html>

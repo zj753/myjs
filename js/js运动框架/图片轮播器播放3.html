@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>仿flash动画</title>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        body{
+            background-color: blanchedalmond;
+        }
+        .playImg{
+            width: 400px;
+            margin:50px auto;
+            background-color: #cdcdcd;
+            position: relative;
+        }
+        .big_Pic{
+            height: 300px;
+            width: 100%;
+        }
+        .small_Pic{
+            position: relative;
+            overflow: hidden;
+            height: 120px;
+            width: 400px;
+        }
+        .big_ul{
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+        }
+        .big_ul li{
+            position: absolute;
+            width: 400px;
+            height: 300px;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        .maskRight{
+            position:absolute;
+            right: 0;
+            width:200px;
+            height: 300px;
+            background-color: red;
+            z-index: 3000;
+            cursor: pointer;
+            filter: alpha(opacity:0);
+            opacity: 0;
+        }
+        .maskLeft{
+            position:absolute;
+            left: 0;
+            width:200px;
+            height: 300px;
+            background-color: green;
+            z-index: 3000;
+            cursor: pointer;
+            filter: alpha(opacity:0);
+            opacity: 0;
+        }
+        .left,.right{
+            position:absolute;
+            z-index: 3001;
+            top: 130px;
+
+            width:30px;
+            padding: 20px 30px;
+            font-size: 40px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background-color: sandybrown;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .left{
+            left: 10px;
+        }
+        .right{
+            right: 10px;
+        }
+
+        .small_ul{
+            position: absolute;
+            padding: 5px;
+            /*width: 800px;*/
+            height: 110px;
+        }
+        .small_ul li{
+            width: 120px;
+            height: 100px;
+            padding: 5px;
+            float: left;
+            filter: alpha(opacity:60);
+            opacity: .6;
+            cursor: pointer;
+        }
+        .small_ul li:first-child{
+            filter: alpha(opacity:100);
+            opacity:1;
+        }
+
+    </style>
+
+    <script>
+        function getByClass(oParent,sClass){
+            var oEle=oParent.getElementsByTagName("*");
+            var aResult=[];
+            for(var i=0;i<oEle.length;i++){
+                if(sClass==oEle[i].className){
+                    aResult.push(oEle[i]);
+                }
+            }
+            return aResult;
+
+        }
+
+        window.onload=function(){
+            var oDiv=document.getElementsByClassName("playImg")[0];
+            var oMaskRight=getByClass(oDiv,"maskRight")[0];
+            var oMaskLeft=getByClass(oDiv,"maskLeft")[0];
+            var oRight=getByClass(oDiv,"right")[0];
+            var oLeft=getByClass(oDiv,"left")[0];
+
+            var oSmall_ul=getByClass(oDiv,"small_ul")[0];
+            var aSmall_li=oSmall_ul.getElementsByTagName("li");
+            var oBig_ul=getByClass(oDiv,"big_ul")[0];
+            var aBig_li=oBig_ul.getElementsByTagName("li");
+
+            oSmall_ul.style.width=aSmall_li.length*aSmall_li[0].offsetWidth+"px";
+
+            //左右按钮
+
+            oRight.onmouseover=oMaskRight.onmouseover=function(){
+                startMove(oRight,"opacity",100);
+            };
+            oRight.onmouseout=oMaskRight.onmouseout=function(){
+                startMove(oRight,"opacity",0);
+            };
+            oLeft.onmouseover=oMaskLeft.onmouseover=function(){
+                startMove(oLeft,"opacity",100);
+            };
+            oLeft.onmouseout=oMaskLeft.onmouseout=function(){
+                startMove(oLeft,"opacity",0);
+            };
+
+            //小图切换图片
+            var nowZIndex=2;
+            var now=0;
+            for(var i=0;i<aSmall_li.length;i++){
+                aSmall_li[i].index=i;
+                aSmall_li[i].onmouseover=function(){
+                    if(now==this.index) return;
+                    now=this.index;
+                    tab();
+                    startMove(this,"opacity",100);
+                };
+                aSmall_li[i].onmouseout=function(){
+                    if(this.index!=now){
+                        startMove(this,"opacity",60);
+                    }
+                }
+
+            }
+            function tab(){
+                //实现图片切换
+                aBig_li[now].style.zIndex=nowZIndex++;
+                //实现图片从上到下
+                aBig_li[now].style.height=0;
+                startMove(aBig_li[now],"height",300);
+
+                for(var i=0;i<aSmall_li.length;i++){
+                    startMove(aSmall_li[i],"opacity",60);
+                }
+                startMove(aSmall_li[now],"opacity",100);
+            }
+            //左右按钮切换
+            oRight.onclick=function(){
+                now++;
+                if(now==aSmall_li.length){
+                    now=0;
+                }
+                tab();
+                smallScroll();
+            };
+            oLeft.onclick=function(){
+                now--;
+                if(now==-1){
+                    now=aSmall_li.length-1;
+                }
+                tab();
+                smallScroll();
+            };
+            //小图滚动封装方法
+            function smallScroll(){
+                if(now==aSmall_li.length-1){
+                    startMove(oSmall_ul,"left",-(now-2)*aSmall_li[0].offsetWidth);
+                }
+                else if (now==0){
+                    startMove(oSmall_ul,"left",0);
+                }
+                else{
+                    startMove(oSmall_ul,"left",-(now-1)*aSmall_li[0].offsetWidth);
+                }
+            }
+
+            var timer=null;
+            timer=setInterval(oRight.onclick,1000);
+            oDiv.onmouseover=function(){
+                clearInterval(timer);
+            };
+            oDiv.onmouseout=function(){
+                timer=setInterval(oRight.onclick,1000);
+            }
+        }
+
+
+    </script>
+
+</head>
+<body>
+<div class="playImg">
+    <div class="big_Pic">
+        <ul class="big_ul">
+            <div class="maskRight"></div>
+            <div class="maskLeft"></div>
+            <div class="right">&gt;</div>
+            <div class="left">&lt;</div>
+            <li style="z-index: 2"><img src="../img/lun1.jpg" alt="" /></li>
+            <li><img src="../img/lun2.jpg" alt=""/></li>
+            <li><img src="../img/lun3.jpg" alt=""/></li>
+            <li><img src="../img/lun4.jpg" alt=""/></li>
+            <li><img src="../img/lun5.jpg" alt=""/></li>
+        </ul>
+    </div>
+    <div class="small_Pic">
+        <ul class="small_ul">
+            <li><img src="../img/lun1.jpg" alt=""  style="z-index: 0"/></li>
+            <li><img src="../img/lun2.jpg" alt=""/></li>
+            <li><img src="../img/lun3.jpg" alt=""/></li>
+            <li><img src="../img/lun4.jpg" alt=""/></li>
+            <li><img src="../img/lun5.jpg" alt=""/></li>
+        </ul>
+    </div>
+
+
+</div>
+
+<script src="../js/move.js"></script>
+</body>
+</html>

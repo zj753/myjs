@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择地址</title>
+    <style>
+        #box{
+            background-color: #bce8f1;
+            width: 500px;
+            height: 300px;
+            margin: 30px auto;
+            padding: 20px 10px;
+            font-size: 16px;
+            color: #303030;
+            border-radius: 5px;
+            position: relative;
+        }
+        #box>form>input{
+            margin-left: 30px;
+            width: 350px;
+            height: 20px;
+            border-radius: 5px;
+            outline:none;
+            border: 1px solid grey;
+        }
+        #box>form>button{
+            display: block;
+             margin: 15px auto;
+            width: 120px;
+            padding: 5px 0;
+            outline: none;
+            border: none;
+            letter-spacing: 2px;
+            box-shadow: 1px 1px 2px 1px grey;
+
+        }
+        #box>a{
+            color: #00A5FF;
+           text-decoration: none;
+        }
+        ul li{
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .pop{
+            height: 300px;
+            width: 300px;
+            background-color: salmon;
+            display: none;
+            z-index: 11;
+            position: absolute;
+            top: 20px;
+            left: 100px;
+        }
+        #shade{
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,.4);
+            z-index: 10;
+            display: none;
+        }
+        label{
+            display: block;
+            padding: 10px;
+        }
+        .pop button{
+            margin-left: 60px;
+            margin-top: 10p;
+        }
+    </style>
+</head>
+<div id="box">
+    <p>您本次的订单号是：1238772343545</p>
+    <p>你订购了以商品：</p>
+     <ul>
+         <li>长藤绿萝盆栽室内大叶大盆水培土培绿植自吸水植物除甲醛垂吊兰</li>
+         <li>泰国进口小吃玛努拉MANORA纯蟹片100g(连罐275)好鲜味</li>
+         <li>台湾雪之恋手造麻薯麻糬糕点零食小吃干吃汤圆香芋抹茶红豆</li>
+     </ul>
+    <form action="#">
+        <input type="text" class="address"/>
+        <a href="#" class="select">选择送货地址</a>
+        <button>提交</button>
+    </form>
+
+    <aside class="pop">
+        <form action="#" >
+            <label >请选择省份：
+                <select name="" class="area">
+                </select>
+            </label>
+            <label >请选择城市：
+                <select name="" class="city">
+                </select>
+            </label>
+            <label>街 &nbsp;&nbsp;道:<input type="text" class="street"/></label>
+            <label >门牌号:<input type="text" class="door"/></label>
+            <button class="ok">确认</button>
+        </form>
+    </aside>
+</div>
+<div id="shade" class="shade"></div>
+<body>
+<script>
+    var arr=[];
+    arr[0]={name:'四川省',city:[{qn:'010',name:'成都'},{qn:'011',name:'宜宾'}]};
+    arr[1]={name:'江苏省',city:[{qn:'020',name:'宜兴市'},{qn:'021',name:'邳州市'}]};
+    arr[2]={name:'重庆市',city:[{qn:'030',name:'北碚'},{qn:'031',name:'渝中区'}]};
+    function getClass(path){
+        var obj=document.querySelector('#'+path);
+        return obj;
+    }
+    var oSelect=getClass('box .select');
+    var oArea=getClass('box .area');
+    var oCity=getClass('box .city');
+    var oStreet=getClass('box .street');
+    var oDoor=getClass('box .door');
+    var oOk=getClass('box .ok');
+    var oAside=getClass('box .pop');
+    var oShade=document.getElementById('shade');
+    var oAddress=getClass('box .address');
+    var oBtn=getClass('box button');
+
+   oSelect.onclick=function(){
+       oAside.style.display='block';
+       oShade.style.display='block';
+       var option=new Option('-请选择-','-1');
+       oArea.appendChild(option);
+       oArea.length=1;
+       arr.forEach(function(el){
+           var option=new Option(el.name,el.name);
+           oArea.appendChild(option);
+       });
+
+       oArea.onchange=function(){
+           var index=this.selectedIndex;
+           oCity.length=0;
+           if(index!=0){
+               var option=new Option('-请选择-','-1');
+               oCity.appendChild(option);
+               arr[index-1].city.forEach(function(el){
+                   var option=new Option(el.name,el.name);
+                   oCity.appendChild(option);
+               })
+
+           }
+       }
+
+   }
+    oOk.onclick=function(){
+        if(oStreet.value.trim()!=''&&oDoor.value.trim()!=''&&oArea.value!='-1'&&oCity.value!='-1'){
+            oAddress.value=oArea.value+oCity.value+oDoor.value.trim()+oStreet.value.trim();
+            oAside.style.display='none';
+            oShade.style.display='none';
+        }
+    }
+    oBtn.onclick=function(){
+      oAddress.value='';
+    }
+</script>
+</body>
+</html>

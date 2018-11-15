@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="#">
+    <fieldset id="fdt">
+        <legend>请选择你喜欢的歌星和你喜欢的歌曲</legend>
+    </fieldset>
+</form>
+<script src="../js/eventCompatible.js"></script>
+<script>
+//    对象字面两：指定的规格创建新对象的表述法
+    var obj={
+//        key:value
+        宋小宝:[{id:'111',name:'天路'},{id:'111',name:'天路1'},{id:'111',name:'天路2'}],
+        刘德华:[{id:'011',name:'谢谢你的爱'},{id:'111',name:'天路'},{id:'111',name:'天路'}]
+    };
+    obj['张学友']=[{id:'101',name:'吻别'},{id:'111',name:'天路2'},{id:'111',name:'天路3'}];
+    var oFieldset=document.getElementById('fdt');
+    var oLable,oSelect,option;
+    for(var key in obj){
+        oLable=document.createElement('label');
+        oLable.innerHTML=key+":";
+        oSelect=document.createElement('select');
+        oSelect.className='star';
+//        Option(str1,str2)
+//        <option  value="这里是str2">这里是str1</option>
+        option=new Option('-请选择-','-1');
+        oSelect.appendChild(option);
+        obj[key].forEach(function(el){
+            option=new Option(el.name,el.id);
+            oSelect.appendChild(option);
+        });
+        oLable.appendChild(oSelect);
+        oFieldset.appendChild(oLable);
+    }
+
+    eventCompatible.agentEvent2(oFieldset,'change',['select','star'],function(){
+        var index=this.selectedIndex;
+        var oParent=this.parentNode;
+        var sName=oParent.innerText;
+        alert(sName.replace(':','')+"的歌曲编号为："+this.value);
+    })
+</script>
+</body>
+</html>

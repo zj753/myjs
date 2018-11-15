@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        #div1{
+            width: 200px;
+            height: 850px;
+            position: absolute;
+            /*top: 30px;*/
+            left: -200px;
+            background: url("img/ce2.jpg") no-repeat;
+            background-size: cover;
+            box-shadow: 1px 1px 2px 1px grey;
+        }
+        span{
+            width: 30px;
+            height: 80px;
+            text-align: center;
+             background: url("img/ce5.jpg") no-repeat center;
+            color: black;
+            position: absolute;
+            display: inline-block;
+            padding-top: 10px;
+            left: 200px;
+            top: 80px;
+            box-shadow: 1px 1px 2px 1px grey;
+        }
+
+        nav h3{
+            color:black;
+            letter-spacing: 1px;
+            margin: 0;
+            height: 45px;
+            text-align: center;
+            line-height: 45px;
+            background: url("img/ce1.jpg") no-repeat;
+        }
+        nav dl dd{
+            display: none;
+        }
+        nav dl{
+            padding: 10px;
+        }
+        nav dl dt{
+            position: relative;
+            font-size: 18px;
+            font-weight: 600;
+            color: #4a616b;
+            padding: 5px 0 5px 20px;
+        }
+        nav dl:hover dd{
+            display: block;
+            position: relative;
+            padding: 5px 5px 5px 20px;
+            /*margin-left: 20px;*/
+            border-bottom: 1px dashed darkgrey;
+        }
+        nav dl:hover dd a{
+            text-decoration: none;
+            color: black;
+        }
+        nav dl:hover dd a:hover{
+            /*color: white;*/
+        }
+        .main{
+            width: 100%;
+            height: 100%;
+        }
+        .main iframe{
+            width: 100%;
+             height: 100%;
+            border: none;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var div1=document.getElementById('div1');
+            div1.onmouseover=function(){
+                mousemv(0);
+            };
+           div1.onmouseout=function(){
+               mousemv(-200);
+           }
+        };
+        var timer=null;
+      function mousemv(itarget){
+          var div1=document.getElementById('div1');
+          clearInterval(timer);
+          var speed=0;
+          if(div1.offsetLeft<itarget){
+              speed=10;
+          }else{
+              speed=-10;
+          }
+        timer=setInterval(function(){
+
+              if(div1.offsetLeft==itarget){
+                  clearInterval(timer);
+              }else{
+                  div1.style.left=div1.offsetLeft+speed+'px';
+              }
+          },30);
+      }
+    </script>
+</head>
+<body>
+<main class="main">
+    <nav id="div1" >
+        <h3>Javascript</h3>
+        <dl>
+            <dt>js应用案例</dt>
+            <dd> <a href="js应用案例/QQ登录框.html" target="iframe">QQ登录框</a></dd>
+            <dd> <a href="js应用案例/产生随机数.html" target="iframe">产生随机数</a></dd>
+            <dd> <a href="js应用案例/伸缩面板.html" target="iframe">伸缩面板</a></dd>
+            <dd> <a href="js应用案例/倒计时.html" target="iframe">倒计时</a></dd>
+            <dd> <a href="js应用案例/前端数据编辑.html" target="iframe">前端数据编辑</a></dd>
+            <dd> <a href="js应用案例/动态创建数据表.html" target="iframe">动态创建数据表</a></dd>
+            <dd> <a href="js应用案例/动态加载1.html" target="iframe">动态加载</a></dd>
+            <dd> <a href="js应用案例/展开收起.html" target="iframe">展开收起</a></dd>
+            <dd> <a href="js应用案例/文字向上滚动.html" target="iframe">文字向上滚动</a></dd>
+            <dd> <a href="js应用案例/文字向左滚动.html" target="iframe">文字向左滚动</a></dd>
+            <dd> <a href="js应用案例/旋转时钟.html" target="iframe">旋转时钟</a></dd>
+            <dd> <a href="js应用案例/浮动广告.html" target="iframe">浮动广告</a></dd>
+            <dd> <a href="js应用案例/滑动门.html" target="iframe">滑动门</a></dd>
+            <dd> <a href="js应用案例/滚动监听.html" target="iframe">滚动监听</a></dd>
+            <dd> <a href="js应用案例/漂浮滚动条.html" target="iframe">漂浮滚动条</a></dd>
+            <dd> <a href="js应用案例/相册.html" target="iframe">相册</a></dd>
+            <dd> <a href="js应用案例/翻转.html" target="iframe">翻转</a></dd>
+            <dd> <a href="js应用案例/表单验证.html" target="iframe">表单验证</a></dd>
+            <dd> <a href="js应用案例/输入信息动态提示.html" target="iframe">输入信息动态提示</a></dd>
+            <dd> <a href="js应用案例/选择地址2.html" target="iframe">选择地址2</a></dd>
+            <dd> <a href="js应用案例/顶部短时广告.html" target="iframe">顶部短时广告</a></dd>
+            <dd> <a href="js应用案例/鼠标滚轮实现对象的缩放.html" target="iframe">鼠标滚轮实现对象的缩放</a></dd>
+        </dl>
+        <dl>
+            <dt>js基础应用</dt>
+            <dd> <a href="js基础应用/日历事件.html" target="iframe">日历事件</a></dd>
+            <dd> <a href="js基础应用/时钟定时器.html" target="iframe">时钟定时器</a></dd>
+            <dd> <a href="js基础应用/延时隐藏.html" target="iframe">延时隐藏</a></dd>
+        </dl>
+        <dl>
+            <dt>DOM应用</dt>
+            <dd> <a href="DOM应用/隔行变色.html" target="iframe">隔行变色</a></dd>
+            <dd> <a href="DOM应用/搜索.html" target="iframe">搜索</a></dd>
+            <dd> <a href="DOM应用/表格排序.html" target="iframe">表格排序</a></dd>
+            <dd> <a href="DOM应用/表格添加、删除.html" target="iframe">表格添加、删除</a></dd>
+        </dl>
+        <dl>
+            <dt>js运动框架</dt>
+            <dd> <a href="js运动框架/串跟着鼠标的猫咪.html" target="iframe">串跟鼠标猫咪</a></dd>
+            <dd> <a href="js运动框架/右侧悬浮框.html" target="iframe">右侧悬浮框</a></dd>
+            <dd> <a href="js运动框架/图片轮播器播放3.html" target="iframe">图片轮播器</a></dd>
+            <dd> <a href="js运动框架/天气（链式）.html" target="iframe">天气（链式）</a></dd>
+            <dd> <a href="js运动框架/幻灯片上下滑动.html" target="iframe">幻灯片上下滑动</a></dd>
+            <dd> <a href="js运动框架/无缝滚动.html" target="iframe">无缝滚动</a></dd>
+            <dd> <a href="js运动框架/淡入淡出.html" target="iframe">淡入淡出</a></dd>
+            <dd> <a href="js运动框架/缓冲运动.html" target="iframe">缓冲运动</a></dd>
+            <dd> <a href="js运动框架/微博发表效果.html" target="iframe">微博发表效果</a></dd>
+        </dl>
+        <dl>
+            <dt>js事件应用</dt>
+            <dd> <a href="js事件应用/拖拽.html" target="iframe">拖拽</a></dd>
+            <dd> <a href="js事件应用/拖拽框2.html" target="iframe">拖拽（滚动条）</a></dd>
+            <dd> <a href="js事件应用/自定义滚动条.html" target="iframe">自定义滚动条</a></dd>
+            <dd> <a href="js事件应用/选项卡.html" target="iframe">选项卡</a></dd>
+
+        </dl>
+        <dl>
+            <dt>cookie应用</dt>
+            <dd> <a href="cookie应用/注册表单.html" target="iframe">注册表单</a></dd>
+
+        </dl>
+        <dl>
+        <dt>js中的面向对象</dt>
+        <dd> <a href="js中的面向对象/json选项卡.html" target="iframe">json选项卡</a></dd>
+        <dd> <a href="js中的面向对象/面向对象选项卡.html" target="iframe">面向对象选项卡</a></dd>
+       </dl>
+
+
+        <span>分享到</span>
+
+    </nav>
+    <iframe src="js基础应用/日历事件.html" frameborder="0" name="iframe" scrolling="auto">
+    </iframe>
+</main>
+
+
+<script src="js/jquery.js"></script>
+</body>
+</html>

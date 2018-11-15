@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择地址</title>
+    <style>
+        .pop{
+            height: 300px;
+            width: 200px;
+            background-color: salmon;
+            display: none;
+            z-index: 11;
+            position: absolute;
+        }
+        #shade{
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,.4);
+            z-index: 10;
+            display: none;
+        }
+    </style>
+</head>
+<div id="box">
+    <input type="text" class="address"/>
+    <a href="#" class="select">选择送货地址</a>
+    <aside class="pop">
+        <form action="#" >
+            <label >请选择省份：
+                <select name="" class="area">
+
+                </select>
+            </label>
+            <label >请选择城市：
+                <select name="" class="city">
+
+                </select>
+            </label>
+            街道：<input type="text" class="street"/>
+            门牌号：<input type="text" class="door"/>
+            <button class="ok">确认</button>
+        </form>
+
+
+    </aside>
+
+</div>
+<div id="shade" class="shade"></div>
+<body>
+<script>
+    var arr=[];
+    arr[0]={name:'四川省',city:[{qn:'098',name:'成都'},{qn:'098',name:'成都'}]};
+    arr[1]={name:'江苏省',city:[{qn:'098',name:'成都'},{qn:'098',name:'成都'}]};
+    arr[2]={name:'重庆市',city:[{qn:'098',name:'成都'},{qn:'098',name:'成都'}]};
+    function getClass(path){
+        var obj=document.querySelector('#'+path);
+        return obj;
+    }
+    var oShade=document.getElementById('shade');
+    var oArea=getClass('box .area');
+    var oCity=getClass('box .city');
+      getClass('box .select').onclick=function(){
+        getClass('box .pop').style.display='block';
+       oShade.style.display='block';
+          oArea.length=0;
+          oCity.length=0;
+        oArea.appendChild(new Option('-请选择-','-1'));
+        oCity.appendChild(new Option('-请选择-','-1'));
+        arr.forEach(function(el,i){
+            oArea.appendChild(new Option(el.name,el.name));
+        })
+
+    };
+
+   oArea.onchange=function(){
+       var aCity=arr[this.selectedIndex-1].city;
+       oCity.length=1;
+       aCity.forEach(function(el){
+           oCity.appendChild(new Option(el.name,el.name))
+       })
+   };
+    getClass('box .ok').onclick=function(){
+        if(oArea.value!='-1' && oCity.value!='-1' && getClass('box .street').value!=''
+                && getClass('box .door').value!=''){
+            getClass('box .address').value=oArea.value+oCity.value+getClass('box .street').value
+            +getClass('box .door').value;
+
+        }
+    }
+</script>
+</body>
+</html>

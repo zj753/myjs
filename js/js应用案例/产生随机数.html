@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <style>
+        #table{
+           border-collapse: collapse;
+            width: 800px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        #table tr{
+            height: 35px;
+        }
+        caption{
+            margin-bottom: 10px;
+            font-size: 22px;
+            color: lightpink;
+        }
+        th{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<table  id="table" class="table-striped table-bordered table-hover ">
+    <caption>随机产生题目</caption>
+    <thead>
+    <th>学号</th>
+    <th>姓名</th>
+    <th>编题号</th>
+    <th>题目</th>
+    </thead>
+    <tbody id="tbody">
+    </tbody>
+</table>
+<!--模板-->
+<template id="temp1">
+    <tr>
+        <td>{{no}}}</td>
+        <td>{{name}}}</td>
+        <td>{{topic_no}}}</td>
+        <td>{{topic_name}}}</td>
+    </tr>
+</template>
+<script>
+    var arr1=[];
+    arr1[arr1.length]={no:'2014001',name:'王芳'};
+    arr1[arr1.length]={no:'2014002',name:'王小小'};
+    arr1[arr1.length]={no:'2014003',name:'宋玉'};
+    arr1[arr1.length]={no:'2014004',name:'胡强'};
+    arr1[arr1.length]={no:'2014005',name:'刘诗文'};
+    var arr2=[];
+    arr2[arr2.length]={topic:'1',topicname:'语文'};
+    arr2[arr2.length]={topic:'2',topicname:'英语'};
+    arr2[arr2.length]={topic:'3',topicname:'数学'};
+    arr2[arr2.length]={topic:'4',topicname:'化学'};
+    arr2[arr2.length]={topic:'5',topicname:'物理'};
+    arr2[arr2.length]={topic:'6',topicname:'地理'};
+
+            var oTbody=document.getElementById('tbody');
+    var sHtml='';
+//    1.字符串拼接
+//    arr1.forEach(function(el){
+////        随机数产生的是0-1
+//        var num=parseInt(Math.random()*arr2.length);
+//        sHtml+="<tr><td>"+el.no+"</td><td>"+el.name+"</td><td>"+arr2[num].topic+"</td><td>"+arr2[num].topicname+"</td></tr>";
+//    });
+// oTbody.innerHTML=sHtml;
+
+
+//    2.模板法
+
+//    var sTempHtml=document.getElementById('temp1').innerHTML;
+//    arr1.forEach(function(el){
+//        var num=parseInt(Math.random()*arr2.length);
+//        sHtml+=sTempHtml.replace('{{no}}}',el.no).replace('{{name}}}',el.name).replace('{{topic_no}}}',arr2[num].topic)
+//                .replace('{{topic_name}}}',arr2[num].topicname)
+//    });
+//    oTbody.innerHTML=sHtml;
+//    3.创建元素法
+//    var tr;
+//    arr1.forEach(function(el){
+//       num=parseInt(Math.random()*arr2.length);
+//        tr=document.createElement('tr');
+//        addTd(tr,el.no);
+//        addTd(tr,el.name);
+//        addTd(tr,arr2[num].topic);
+//        addTd(tr,arr2[num].topicname);
+//        oTbody.appendChild(tr);
+//    });
+//
+//    function addTd(tr,value){
+//        var td=document.createElement('td');
+//        td.innerHTML=value;
+//        tr.appendChild(td);
+//    }
+
+
+//    4.table特有方法
+//    var oTbody1=document.getElementById('table').tBodies[0];
+//    var tr,td,num;
+//    arr1.forEach(function(el,i){
+//        num=parseInt(Math.random()*arr2.length);
+//        tr=oTbody1.insertRow(i);
+//        td=tr.insertCell(0);
+//        td.innerText=el.no;
+//        td=tr.insertCell(1);
+//        td.innerText=el.name;
+//        td=tr.insertCell(2);
+//        td.innerText=arr2[num].topic;
+//        td=tr.insertCell(3);
+//        td.innerText=arr2[num].topicname;
+//    });
+
+//    5对象字面量方法
+//    封装，全局变量只有一个而且是对象，不污染全局空间。
+//    不能重用
+//    var createTable= {
+//        addTr: function (id,arrOne,arrTwo) {
+//            var oTable = document.getElementById(id);
+//            var oTbody = oTable.tBodies[0];
+//            var tr;
+//            var _that=this;
+//            var num;
+//           arrOne.forEach(function(el,i){
+//                num=parseInt(Math.random()*arrTwo.length);
+//                tr=oTbody.insertRow(i);
+//                _that.addTd(tr,el.on,0);
+//                _that.addTd(tr,el.name,1);
+//                _that.addTd(tr,arrTwo[num].topic,2);
+//                _that.addTd(tr,arrTwo[num].topicname,3);
+//            })
+//        },
+//        addTd:function(tr,text,j){
+//           var td=tr.insertCell(j);
+//            td.innerText=text;
+//        }
+//    };
+//    createTable.addTr('table',arr1,arr2);
+
+
+//    6 对象方法
+//    6.1封装类
+    function CreateTable(id,arr1,arr2){
+        this.id=id;
+        this.arr1=arr1;
+        this.arr2=arr2;
+
+    }
+//    6.2添加方法
+    CreateTable.prototype.addTr=function(id,arr1,arr2){
+        var oTable=document.getElementById(this.id);
+        var oTbody=oTable.tBodies[0];
+        var tr,num;
+        var _that=this;
+        var arrTwo=this.arr2;
+        this.arr1.forEach(function(el,i){
+               num=parseInt(Math.random()*arrTwo.length);
+                tr=oTbody.insertRow(i);
+                _that.addTd(tr,el.no,0);
+                _that.addTd(tr,el.name,1);
+                _that.addTd(tr,arrTwo[num].topic,2);
+                _that.addTd(tr,arrTwo[num].topicname,3);
+        })
+    };
+    CreateTable.prototype.addTd=function(tr,text,j){
+        var td=tr.insertCell(j);
+        td.innerHTML=text;
+    };
+    var tab1=new CreateTable('table',arr1,arr2);
+    tab1.addTr();
+</script>
+<script src="../js/jquery.js"></script>
+</body>
+</html>

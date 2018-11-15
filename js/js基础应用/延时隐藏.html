@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>延时隐藏</title>
+    <style>
+        #diva{
+            height: 50px;
+            width: 50px;
+            background-color: salmon;
+            float: left;
+        }
+        #divb{
+            height: 200px;
+            width: 200px;
+            margin-left: 30px;
+            background-color: #fc9c89;
+            float: left;
+            display: none;
+        }
+        main{
+            width: 500px;
+            height: 700px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<script>
+    window.onload=function(){
+        var diva=document.getElementById('diva');
+        var divb=document.getElementById('divb');
+        var timer=null;
+        diva.onmouseover=divb.onmouseover=function(){
+            clearTimeout(timer);
+            divb.style.display='block';
+
+        };
+        diva.onmouseout=divb.onmouseout=function(){
+            timer=setTimeout(function(){
+               divb.style.display='none';
+           },300);
+        };
+
+    }
+</script>
+<body>
+<main>
+    <div id="diva"></div>
+    <div id="divb"></div>
+</main>
+
+<script src="../js/jquery.js"></script>
+</body>
+</html>
